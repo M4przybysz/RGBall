@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 public class RotateCameraY : MonoBehaviour
@@ -16,8 +15,10 @@ public class RotateCameraY : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Set focal point to the player's position
         transform.position = player.transform.position;
 
+        // Move camera left and right
         mouseInputX = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up, mouseInputX * rotationSpeed * Time.deltaTime);
     }
