@@ -58,4 +58,13 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(rollingSpeed * movementVector);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Orb"))
+        {
+            other.gameObject.GetComponent<Orb>().ChanagePlayerAspect();
+            Destroy(other.gameObject);
+        }
+    }
 }
