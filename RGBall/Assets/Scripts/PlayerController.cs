@@ -3,8 +3,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // External elements
+    [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject focalPoint;
-    Transform mainCameraTransform;
+    Transform focalPointTransform;
 
     // Internal elements
     float movementInputH;
@@ -14,18 +15,37 @@ public class PlayerController : MonoBehaviour
 
     // Gameplay variables
     int healthPoints = 5;
-    float rollingSpeed = 10f;
-    float maxRollingSpeed = 10f;
+    float _rollingSpeedForce = 10f;
+    float _maxRollingSpeed = 15f;
+    float _ExtraBounceForce = 1500f;
     float decelleration = 3f;
 
+    // Backing fields
+    public float RollingSpeedForce
+    {
+        get { return _rollingSpeedForce; }
+        set { _rollingSpeedForce = Mathf.Clamp(value, 10f, 100f); }
+    }
+
+    public float MaxRollingSpeed
+    {
+        get { return _maxRollingSpeed; }
+        set { _maxRollingSpeed = Mathf.Clamp(value, 15f, 255f); }
+    }
+
+    public float ExtraBounceForce
+    {
+        get { return _ExtraBounceForce; }
+        set { _ExtraBounceForce = Mathf.Clamp(value, 1500f, 5000f); }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-        playerRigidbody.linearDamping = rollingSpeed / maxRollingSpeed;
+        playerRigidbody.linearDamping = RollingSpeedForce / MaxRollingSpeed;
 
-        mainCameraTransform = focalPoint.transform;
+        focalPointTransform = focalPoint.transform;
     }
 
     // Update is called once per frame
@@ -47,24 +67,38 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Vector3 cameraForward = mainCameraTransform.forward;
-            Vector3 cmaeraRight = mainCameraTransform.right;
+            Vector3 cameraForward = focalPointTransform.forward;
+            Vector3 cmaeraRight = focalPointTransform.right;
 
             cameraForward.y = 0;
             cmaeraRight.y = 0;
 
             movementVector = (movementInputV * cameraForward) + (movementInputH * cmaeraRight);
 
-            playerRigidbody.AddForce(rollingSpeed * movementVector);
+            playerRigidbody.AddForce(RollingSpeedForce * movementVector);
         }
     }
 
+    public void ScaleBall(float scale)
+    {
+        transform.localScale = new Vector3(scale, scale, scale);
+        mainCamera.GetComponent<RotateCameraX>().Offset *= scale / 1.5f;
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Orb"))
         {
             other.gameObject.GetComponent<Orb>().ChanagePlayerAspect();
             Destroy(other.gameObject);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Ground"))
+        {
+            playerRigidbody.AddExplosionForce(ExtraBounceForce, collision.GetContact(0).point, 5);
         }
     }
 }
