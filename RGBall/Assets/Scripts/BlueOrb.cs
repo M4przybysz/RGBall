@@ -24,6 +24,11 @@ public class BlueOrb : Orb
         // Set new player material color
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
-        player.GetComponent<PlayerController>().ExtraBounceForce = 1500f + 3500f / 255f * colorValue;
+        // Change player's bounciness
+        float extraBounceStep = (PlayerController.maxExtraBounceForce - PlayerController.normalExtraBounceForce) / 255f;
+        float bouncinessStep = (PlayerController.maxBounciness - PlayerController.normalBounciness) / 255f;
+
+        player.GetComponent<PlayerController>().ExtraBounceForce = PlayerController.normalExtraBounceForce + extraBounceStep * colorValue;
+        player.GetComponent<PlayerController>().Bounciness = PlayerController.normalBounciness + bouncinessStep * colorValue;
     }
 }

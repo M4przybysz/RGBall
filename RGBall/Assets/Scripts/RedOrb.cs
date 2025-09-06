@@ -25,7 +25,10 @@ public class RedOrb : Orb
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
         // Change player's speed force and max speed
-        player.GetComponent<PlayerController>().RollingSpeedForce += 90f / 255f * colorValue;
-        player.GetComponent<PlayerController>().MaxRollingSpeed += 240f / 255f * colorValue;
+        float speedForceStep = (PlayerController.maxRollingSpeedForce - PlayerController.minRollingSpeedForce) / 255f;
+        float speedLimitStep = (PlayerController.maxRollingSpeedLimit - PlayerController.minRollingSpeedLimit) / 255f;
+
+        player.GetComponent<PlayerController>().RollingSpeedForce += speedForceStep * colorValue;
+        player.GetComponent<PlayerController>().RollingSpeedLimit += speedLimitStep * colorValue;
     }
 }

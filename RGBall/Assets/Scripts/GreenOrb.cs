@@ -25,6 +25,7 @@ public class GreenOrb : Orb
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
         // Change player's scale
-        player.GetComponent<PlayerController>().ScaleBall(1f + 1.5f / 255f * colorValue);
+        float scaleStep = (PlayerController.maxScale - PlayerController.normalScale) / 255f;
+        player.GetComponent<PlayerController>().ScaleBall(PlayerController.normalScale + scaleStep * colorValue);
     }
 }
