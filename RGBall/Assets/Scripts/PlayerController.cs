@@ -151,51 +151,42 @@ public class PlayerController : MonoBehaviour
     public void ScaleBall(float scale)
     {
         transform.localScale = new Vector3(scale, scale, scale);
-
         mainCamera.GetComponent<RotateCameraX>().Offset = RotateCameraX.normalOffset * scale;
     }
 
     void InvertColors()
     {
         // Invert material colors
-        int colorR = Mathf.RoundToInt(GetComponent<Renderer>().material.color.r * 255);
-        int colorG = Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
-        int colorB = Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
+        int newColorR = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.r * 255);
+        int newColorG = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
+        int newColorB = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
 
-        GetComponent<Renderer>().material.color = new Color32((byte)(255 - colorR), (byte)(255 - colorG), (byte)(255 - colorB), 255);
+        GetComponent<Renderer>().material.color = new Color32((byte)newColorR, (byte)newColorG, (byte)newColorB, 255);
 
         // Invert ball aspects
+        RollingSpeedForce = (maxRollingSpeedForce - minRollingSpeedForce) / 255 * newColorR;
+        RollingSpeedLimit = (maxRollingSpeedLimit - minRollingSpeedLimit) / 255 * newColorR;
 
-        // Speed 
-        RollingSpeedForce = (maxRollingSpeedForce - minRollingSpeedForce) / 255 * (255 - colorR);
-        RollingSpeedLimit = (maxRollingSpeedLimit - minRollingSpeedLimit) / 255 * (255 - colorR);
+        float scaleStep;
+        float extraBounceStep;
+        float bouncinessStep;
 
         if (ColorInvertion)
         {
-            // Scale
-            float scaleStep = (normalScale - minScale) / 255f;
-            ScaleBall(normalScale - scaleStep * (255 - colorG));
-
-            // Bounce
-            float extraBounceStep = (normalExtraBounceForce - minExtraBounceForce) / 255f;
-            float bouncinessStep = (normalBounciness - minBounciness) / 255f;
-
-            ExtraBounceForce = normalExtraBounceForce - extraBounceStep * (255 - colorB);
-            Bounciness = normalBounciness - bouncinessStep * (255 - colorB);
+            scaleStep = -1 * (normalScale - minScale) / 255f;
+            extraBounceStep = -1 * (normalExtraBounceForce - minExtraBounceForce) / 255f;
+            bouncinessStep = -1 * (normalBounciness - minBounciness) / 255f;
         }
         else
         {
-            // Scale
-            float scaleStep = (maxScale - normalScale) / 255f;
-            ScaleBall(normalScale + scaleStep * (255 - colorG));
-
-            // Bounce
-            float extraBounceStep = (maxExtraBounceForce - normalExtraBounceForce) / 255f;
-            float bouncinessStep = (maxBounciness - normalBounciness) / 255f;
-
-            ExtraBounceForce = normalExtraBounceForce + extraBounceStep * (255 - colorB);
-            Bounciness = normalBounciness + bouncinessStep * (255 - colorB);
+            scaleStep = (maxScale - normalScale) / 255f;
+            extraBounceStep = (maxExtraBounceForce - normalExtraBounceForce) / 255f;
+            bouncinessStep = (maxBounciness - normalBounciness) / 255f;
         }
+
+        ScaleBall(normalScale + scaleStep * newColorG);
+        ExtraBounceForce = normalExtraBounceForce + extraBounceStep * newColorB;
+        Bounciness = normalBounciness + bouncinessStep * newColorB;
     }
 
     //========================================================================

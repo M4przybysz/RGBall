@@ -25,17 +25,17 @@ public class GreenOrb : Orb
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
         // Change player's scale
+        float scaleStep;
+
         if (player.GetComponent<PlayerController>().ColorInvertion)
         {
-            // Reduce scale when colors are inverted
-            float scaleStep = (PlayerController.normalScale - PlayerController.minScale) / 255f;
-            player.GetComponent<PlayerController>().ScaleBall(PlayerController.normalScale - scaleStep * playerColorG);
+            scaleStep = -1 * (PlayerController.normalScale - PlayerController.minScale) / 255f; // Reduce scale when colors are inverted
         }
         else
         {
-            // Increase scale when colors are inverted
-            float scaleStep = (PlayerController.maxScale - PlayerController.normalScale) / 255f;
-            player.GetComponent<PlayerController>().ScaleBall(PlayerController.normalScale + scaleStep * playerColorG);
+            scaleStep = (PlayerController.maxScale - PlayerController.normalScale) / 255f; // Increase scale when colors are inverted
         }
+
+        player.GetComponent<PlayerController>().ScaleBall(PlayerController.normalScale + scaleStep * playerColorG);
     }
 }
