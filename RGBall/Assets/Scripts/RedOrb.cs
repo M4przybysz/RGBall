@@ -28,7 +28,7 @@ public class RedOrb : Orb
         float speedForceStep = (PlayerController.maxRollingSpeedForce - PlayerController.minRollingSpeedForce) / 255f;
         float speedLimitStep = (PlayerController.maxRollingSpeedLimit - PlayerController.minRollingSpeedLimit) / 255f;
 
-        player.GetComponent<PlayerController>().RollingSpeedForce += speedForceStep * colorValue;
-        player.GetComponent<PlayerController>().RollingSpeedLimit += speedLimitStep * colorValue;
+        player.GetComponent<PlayerController>().RollingSpeedForce = speedForceStep * playerColorR;
+        player.GetComponent<PlayerController>().RollingSpeedLimit = speedLimitStep * playerColorR;
     }
 }

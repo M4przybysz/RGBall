@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     //========================================================================
     int healthPoints = 5;
     const float decelleration = 3f;
+    bool _colorInvertion = false;
 
     // Rolling speed variables
     float _rollingSpeedForce = 10f;
@@ -77,6 +79,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool ColorInvertion
+    {
+        get { return _colorInvertion; }
+        set
+        {
+            _colorInvertion = value;
+            InvertColors();
+        }
+    }
+
     //========================================================================
     // Start and Update
     //========================================================================
@@ -91,9 +103,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         MoveBall();
+        HandleInputs();
     }
 
     //========================================================================
@@ -111,22 +124,78 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // Get camera directions
             Vector3 cameraForward = focalPointTransform.forward;
             Vector3 cmaeraRight = focalPointTransform.right;
 
             cameraForward.y = 0;
             cmaeraRight.y = 0;
 
+            // Create a movement vector
             movementVector = (movementInputV * cameraForward) + (movementInputH * cmaeraRight);
 
+            // Invert controls if colors are inverted
+            if (ColorInvertion) { movementVector *= -1; }
+
+            // Roll the ball
             playerRigidbody.AddForce(RollingSpeedForce * movementVector);
         }
+    }
+
+    void HandleInputs()
+    {
+        // Invert colors after pressing Space
+        if (Input.GetKeyDown(KeyCode.Space)) { ColorInvertion = !ColorInvertion; }
     }
 
     public void ScaleBall(float scale)
     {
         transform.localScale = new Vector3(scale, scale, scale);
-        mainCamera.GetComponent<RotateCameraX>().Offset *= scale / 1.5f;
+
+        mainCamera.GetComponent<RotateCameraX>().Offset = RotateCameraX.normalOffset * scale;
+    }
+
+    void InvertColors()
+    {
+        // Invert material colors
+        int colorR = Mathf.RoundToInt(GetComponent<Renderer>().material.color.r * 255);
+        int colorG = Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
+        int colorB = Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
+
+        GetComponent<Renderer>().material.color = new Color32((byte)(255 - colorR), (byte)(255 - colorG), (byte)(255 - colorB), 255);
+
+        // Invert ball aspects
+
+        // Speed 
+        RollingSpeedForce = (maxRollingSpeedForce - minRollingSpeedForce) / 255 * (255 - colorR);
+        RollingSpeedLimit = (maxRollingSpeedLimit - minRollingSpeedLimit) / 255 * (255 - colorR);
+
+        if (ColorInvertion)
+        {
+            // Scale
+            float scaleStep = (normalScale - minScale) / 255f;
+            ScaleBall(normalScale - scaleStep * (255 - colorG));
+
+            // Bounce
+            float extraBounceStep = (normalExtraBounceForce - minExtraBounceForce) / 255f;
+            float bouncinessStep = (normalBounciness - minBounciness) / 255f;
+
+            ExtraBounceForce = normalExtraBounceForce - extraBounceStep * (255 - colorB);
+            Bounciness = normalBounciness - bouncinessStep * (255 - colorB);
+        }
+        else
+        {
+            // Scale
+            float scaleStep = (maxScale - normalScale) / 255f;
+            ScaleBall(normalScale + scaleStep * (255 - colorG));
+
+            // Bounce
+            float extraBounceStep = (maxExtraBounceForce - normalExtraBounceForce) / 255f;
+            float bouncinessStep = (maxBounciness - normalBounciness) / 255f;
+
+            ExtraBounceForce = normalExtraBounceForce + extraBounceStep * (255 - colorB);
+            Bounciness = normalBounciness + bouncinessStep * (255 - colorB);
+        }
     }
 
     //========================================================================

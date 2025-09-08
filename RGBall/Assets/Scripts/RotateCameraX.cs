@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RotateCameraX : MonoBehaviour
 {
-    Vector2 _offset = new Vector2(1.5f, -1.5f);
+    Vector2 _offset = new(1.5f, -1.5f);
+    public static readonly Vector2 normalOffset = new(1.5f, -1.5f);
     float rotationSpeed = 100f;
     float minRotation = -75;
     float maxRotation = 75;
@@ -17,7 +18,7 @@ public class RotateCameraX : MonoBehaviour
         set
         {
             _offset = value;
-            transform.localPosition = new Vector3(0, value.x, value.y);
+            transform.localPosition = new Vector3(0, _offset.x, _offset.y);
         }
     }
 
