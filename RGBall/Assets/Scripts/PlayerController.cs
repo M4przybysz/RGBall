@@ -21,9 +21,13 @@ public class PlayerController : MonoBehaviour
     //========================================================================
     // Gameplay variables
     //========================================================================
-    int healthPoints = 5;
     const float decelleration = 3f;
     bool _colorInvertion = false;
+    Vector3 _respawnPosition;
+
+    // Health points
+    int _healthPoints = 5;
+    const int maxHealthPoints = 5;
 
     // Rolling speed variables
     float _rollingSpeedForce = 10f;
@@ -51,6 +55,18 @@ public class PlayerController : MonoBehaviour
     //========================================================================
     // Backing fields
     //========================================================================
+    public Vector3 RespawnPosition
+    {
+        get { return _respawnPosition; }
+        set { _respawnPosition = value; }
+    }
+
+    public int HealthPoints
+    {
+        get { return _healthPoints; }
+        set { _healthPoints = Mathf.Clamp(value, 0, maxHealthPoints); }
+    }
+
     public float RollingSpeedForce
     {
         get { return _rollingSpeedForce; }
@@ -100,11 +116,14 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.linearDamping = RollingSpeedForce / RollingSpeedLimit;
 
         focalPointTransform = focalPoint.transform;
+
+        RespawnPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckPositionY(); // Check if player fell off the map
         MoveBall();
         HandleInputs();
     }
@@ -140,6 +159,11 @@ public class PlayerController : MonoBehaviour
             // Roll the ball
             playerRigidbody.AddForce(RollingSpeedForce * movementVector);
         }
+    }
+
+    void CheckPositionY()
+    {
+        if(transform.position.y < -5) { Kill(); }
     }
 
     void HandleInputs()
@@ -189,6 +213,24 @@ public class PlayerController : MonoBehaviour
         Bounciness = normalBounciness + bouncinessStep * newColorB;
     }
 
+    public void Damage(int damage)
+    {
+        HealthPoints -= damage;
+        if (HealthPoints <= 0) { Respawn(); }
+    }
+
+    public void Kill()
+    {
+        Respawn();
+    }
+
+    public void Respawn()
+    {
+        HealthPoints = maxHealthPoints;
+        playerRigidbody.linearVelocity = new Vector3(0, 0, 0);
+        transform.position = RespawnPosition;
+    }
+
     //========================================================================
     // Unity events
     //========================================================================    
@@ -198,6 +240,11 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.GetComponent<Orb>().ChanagePlayerAspect();
             Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("CheckpointTrigger"))
+        {
+            RespawnPosition = other.transform.parent.GetComponent<CheckpointController>().respawnPosition;
         }
     }
 
