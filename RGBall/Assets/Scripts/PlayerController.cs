@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     const int maxHealthPoints = 5;
 
     // Rolling speed variables
-    float _rollingSpeedForce = 10f;
-    public const float minRollingSpeedForce = 10f;
+    float _rollingSpeedForce = 15f;
+    public const float minRollingSpeedForce = 15f;
     public const float maxRollingSpeedForce = 100f;
     float _rollingSpeedLimit = 15f;
     public const float minRollingSpeedLimit = 15f;
