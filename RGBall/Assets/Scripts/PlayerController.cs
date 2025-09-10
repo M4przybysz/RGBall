@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     // Rolling speed variables
     float _rollingSpeedForce = 10f;
     public const float minRollingSpeedForce = 10f;
-    public const float maxRollingSpeedForce = 100f; 
+    public const float maxRollingSpeedForce = 100f;
     float _rollingSpeedLimit = 15f;
     public const float minRollingSpeedLimit = 15f;
     public const float maxRollingSpeedLimit = 255f;
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckPositionY()
     {
-        if(transform.position.y < -5) { Kill(); }
+        if (transform.position.y < -5) { Kill(); }
     }
 
     void HandleInputs()
@@ -216,6 +216,7 @@ public class PlayerController : MonoBehaviour
     public void Damage(int damage)
     {
         HealthPoints -= damage;
+        print(HealthPoints);
         if (HealthPoints <= 0) { Respawn(); }
     }
 
@@ -250,9 +251,32 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Ground"))
+        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("KillingFloor"))
         {
             playerRigidbody.AddExplosionForce(ExtraBounceForce, collision.GetContact(0).point, 5);
         }
+
+        if (collision.gameObject.CompareTag("KillingFloor"))
+        {
+            StopCoroutine(nameof(Heal));
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("KillingFloor"))
+        {
+            StartCoroutine(nameof(Heal));
+        }
+    }
+
+    //========================================================================
+    // Coroutines
+    //========================================================================  
+    IEnumerator Heal()
+    {
+        yield return new WaitForSeconds(5);
+        HealthPoints = maxHealthPoints;
+        print("Regained full health");
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class RotateCameraX : MonoBehaviour
