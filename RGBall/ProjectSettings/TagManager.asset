@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - CheckpointTrigger
   - KillingFloor
+  - ColorfulGate
   layers:
   - Default
   - TransparentFX

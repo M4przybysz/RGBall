@@ -247,6 +247,17 @@ public class PlayerController : MonoBehaviour
         {
             RespawnPosition = other.transform.parent.GetComponent<CheckpointController>().respawnPosition;
         }
+
+        if (other.CompareTag("ColorfulGate"))
+        {
+            // Get player's colors
+            int colorR = Mathf.RoundToInt(GetComponent<Renderer>().material.color.r * 255);
+            int colorG = Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
+            int colorB = Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
+
+            // Check colors on the gate
+            other.gameObject.GetComponent<ColorfulGateController>().checkPlayerColor(new Vector3(colorR, colorG, colorB));
+        }
     }
 
     void OnCollisionEnter(Collision collision)
