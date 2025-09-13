@@ -185,11 +185,17 @@ public class PlayerController : MonoBehaviour
         int newColorG = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
         int newColorB = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
 
-        GetComponent<Renderer>().material.color = new Color32((byte)newColorR, (byte)newColorG, (byte)newColorB, 255);
+        SetBallAspects(new Vector3(newColorR, newColorG, newColorB));
+    }
 
-        // Invert ball aspects
-        RollingSpeedForce = (maxRollingSpeedForce - minRollingSpeedForce) / 255 * newColorR;
-        RollingSpeedLimit = (maxRollingSpeedLimit - minRollingSpeedLimit) / 255 * newColorR;
+    void SetBallAspects(Vector3 color)
+    {
+        // Change ball's color
+        GetComponent<Renderer>().material.color = new Color32((byte)color.x, (byte)color.y, (byte)color.z, 255);
+
+        // Set new ball aspects
+        RollingSpeedForce = (maxRollingSpeedForce - minRollingSpeedForce) / 255 * color.x;
+        RollingSpeedLimit = (maxRollingSpeedLimit - minRollingSpeedLimit) / 255 * color.x;
 
         float scaleStep;
         float extraBounceStep;
@@ -208,9 +214,9 @@ public class PlayerController : MonoBehaviour
             bouncinessStep = (maxBounciness - normalBounciness) / 255f;
         }
 
-        ScaleBall(normalScale + scaleStep * newColorG);
-        ExtraBounceForce = normalExtraBounceForce + extraBounceStep * newColorB;
-        Bounciness = normalBounciness + bouncinessStep * newColorB;
+        ScaleBall(normalScale + scaleStep * color.y);
+        ExtraBounceForce = normalExtraBounceForce + extraBounceStep * color.z;
+        Bounciness = normalBounciness + bouncinessStep * color.z;
     }
 
     public void Damage(int damage)
@@ -241,11 +247,13 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.GetComponent<Orb>().ChanagePlayerAspect();
             Destroy(other.gameObject);
+            return;
         }
 
         if (other.CompareTag("CheckpointTrigger"))
         {
             RespawnPosition = other.transform.parent.GetComponent<CheckpointController>().respawnPosition;
+            return;
         }
 
         if (other.CompareTag("ColorfulGate"))
@@ -257,6 +265,30 @@ public class PlayerController : MonoBehaviour
 
             // Check colors on the gate
             other.gameObject.GetComponent<ColorfulGateController>().checkPlayerColor(new Vector3(colorR, colorG, colorB));
+            return;
+        }
+
+        if (other.CompareTag("ColorPicker"))
+        {
+            // Get player's colors
+            int colorR = Mathf.RoundToInt(GetComponent<Renderer>().material.color.r * 255);
+            int colorG = Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
+            int colorB = Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
+
+            // Get color picker colors
+            Vector3 pickerColors = other.gameObject.GetComponent<ColorPickerController>().colorValue;
+
+            if (colorR >= pickerColors.x && colorG >= pickerColors.y && colorB >= pickerColors.z)
+            {
+                colorR -= (int)pickerColors.x;
+                colorG -= (int)pickerColors.y;
+                colorB -= (int)pickerColors.z;
+
+                SetBallAspects(new Vector3(colorR, colorG, colorB));
+                other.gameObject.GetComponent<ColorPickerController>().PickColor();
+            }
+
+            return;
         }
     }
 

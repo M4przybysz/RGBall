@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 7169787803576767398}
   m_Layer: 0
   m_Name: ColorfulGate
-  m_TagString: Untagged
+  m_TagString: ColorfulGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

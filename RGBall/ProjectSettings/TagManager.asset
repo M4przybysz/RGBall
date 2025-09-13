@@ -9,6 +9,7 @@ TagManager:
   - CheckpointTrigger
   - KillingFloor
   - ColorfulGate
+  - ColorPicker
   layers:
   - Default
   - TransparentFX
