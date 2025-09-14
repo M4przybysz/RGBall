@@ -10,6 +10,7 @@ TagManager:
   - KillingFloor
   - ColorfulGate
   - ColorPicker
+  - Launcher
   layers:
   - Default
   - TransparentFX

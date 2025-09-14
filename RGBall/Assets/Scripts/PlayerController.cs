@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public const float maxRollingSpeedLimit = 255f;
 
     // Bounce variables
-    float _ExtraBounceForce = 1500f;
+    float _extraBounceForce = 1500f;
     public const float minExtraBounceForce = 0f;
     public const float normalExtraBounceForce = 1500f;
     public const float maxExtraBounceForce = 7500f;
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public const float minBounciness = 0f;
     public const float normalBounciness = 0.5f;
     public const float maxBounciness = 1f;
+    float _bounceForceMultiplier = 1;
 
     // Scale variables
     public const float minScale = 0.25f;
@@ -81,8 +82,8 @@ public class PlayerController : MonoBehaviour
 
     public float ExtraBounceForce
     {
-        get { return _ExtraBounceForce; }
-        set { _ExtraBounceForce = Mathf.Clamp(value, minExtraBounceForce, maxExtraBounceForce); }
+        get { return _extraBounceForce; }
+        set { _extraBounceForce = Mathf.Clamp(value, minExtraBounceForce, maxExtraBounceForce); }
     }
 
     public float Bounciness
@@ -93,6 +94,12 @@ public class PlayerController : MonoBehaviour
             _bounciness = Mathf.Clamp(value, minBounciness, maxBounciness);
             GetComponent<SphereCollider>().material.bounciness = _bounciness;
         }
+    }
+
+    public float BounceForceMultiplier
+    {
+        get { return _bounceForceMultiplier; }
+        set { _bounceForceMultiplier = value; }
     }
 
     public bool ColorInvertion
@@ -290,13 +297,26 @@ public class PlayerController : MonoBehaviour
 
             return;
         }
+
+        if (other.CompareTag("Launcher"))
+        {
+            BounceForceMultiplier = other.GetComponent<LauncherController>().multiplier;
+            playerRigidbody.linearDamping = 0;
+            other.GetComponent<LauncherController>().Launch();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("KillingFloor"))
+        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("KillingFloor") && !collision.gameObject.CompareTag("Launcher"))
         {
-            playerRigidbody.AddExplosionForce(ExtraBounceForce, collision.GetContact(0).point, 5);
+            playerRigidbody.AddExplosionForce(ExtraBounceForce * BounceForceMultiplier, collision.GetContact(0).point, 5);
+        }
+
+        if (collision.gameObject.CompareTag("Ground") && BounceForceMultiplier != 1)
+        {
+            BounceForceMultiplier = 1;
+            playerRigidbody.linearDamping = RollingSpeedForce / RollingSpeedLimit;
         }
 
         if (collision.gameObject.CompareTag("KillingFloor"))
