@@ -24,6 +24,9 @@ public class BlueOrb : Orb
         // Set new player material color
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
+        // Update UI
+        UI.GetComponent<UIManager>().UpdateRGB(new Vector3(playerColorR, playerColorG, playerColorB));
+
         // Change player's bounciness
         float extraBounceStep;
         float bouncinessStep;
@@ -34,7 +37,7 @@ public class BlueOrb : Orb
             extraBounceStep = -1 * (PlayerController.normalExtraBounceForce - PlayerController.minExtraBounceForce) / 255f;
             bouncinessStep = -1 * (PlayerController.normalBounciness - PlayerController.minBounciness) / 255f;
         }
-        else 
+        else
         {
             // Increase bounce when colors are inverted
             extraBounceStep = (PlayerController.maxExtraBounceForce - PlayerController.normalExtraBounceForce) / 255f;

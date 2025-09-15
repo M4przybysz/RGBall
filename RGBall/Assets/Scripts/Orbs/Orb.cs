@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class Orb : MonoBehaviour
 {
-    public int colorValue = 0; // Value of one of RGB colours from 0 to 255;
+    protected GameObject UI;
+    [SerializeField] protected int colorValue = 0; // Value of one of RGB colours from 0 to 255;
     float minScale = 0.25f;
     float maxScale = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        UI = GameObject.Find("UI");
+
         SetSize();
         SetColor();
     }

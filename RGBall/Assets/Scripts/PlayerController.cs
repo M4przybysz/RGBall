@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     //========================================================================
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject focalPoint;
+    [SerializeField] GameObject UI;
     Transform focalPointTransform;
 
     //========================================================================
@@ -125,14 +126,22 @@ public class PlayerController : MonoBehaviour
         focalPointTransform = focalPoint.transform;
 
         RespawnPosition = transform.position;
+
+        // Update UI
+        UI.GetComponent<UIManager>().UpdateRGB(new Vector3(0, 0, 0));
+        UI.GetComponent<UIManager>().UpdateInvertion(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckPositionY(); // Check if player fell off the map
-        MoveBall();
         HandleInputs();
+    }
+
+    void FixedUpdate()
+    {
+        MoveBall();
     }
 
     //========================================================================
@@ -192,7 +201,12 @@ public class PlayerController : MonoBehaviour
         int newColorG = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
         int newColorB = 255 - Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
 
+        // Change ball aspects
         SetBallAspects(new Vector3(newColorR, newColorG, newColorB));
+
+        // Update UI
+        UI.GetComponent<UIManager>().UpdateRGB(new Vector3(newColorR, newColorG, newColorB));
+        UI.GetComponent<UIManager>().UpdateInvertion(ColorInvertion);
     }
 
     void SetBallAspects(Vector3 color)
@@ -270,6 +284,9 @@ public class PlayerController : MonoBehaviour
             int colorG = Mathf.RoundToInt(GetComponent<Renderer>().material.color.g * 255);
             int colorB = Mathf.RoundToInt(GetComponent<Renderer>().material.color.b * 255);
 
+            // Update UI
+            UI.GetComponent<UIManager>().UpdateRGB(new Vector3(colorR, colorG, colorB));
+
             // Check colors on the gate
             other.gameObject.GetComponent<ColorfulGateController>().checkPlayerColor(new Vector3(colorR, colorG, colorB));
             return;
@@ -293,6 +310,9 @@ public class PlayerController : MonoBehaviour
 
                 SetBallAspects(new Vector3(colorR, colorG, colorB));
                 other.gameObject.GetComponent<ColorPickerController>().PickColor();
+
+                // Update UI
+                UI.GetComponent<UIManager>().UpdateRGB(new Vector3(colorR, colorG, colorB));
             }
 
             return;

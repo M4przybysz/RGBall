@@ -24,6 +24,9 @@ public class GreenOrb : Orb
         // Set new player material color
         player.GetComponent<Renderer>().material.color = new Color32((byte)playerColorR, (byte)playerColorG, (byte)playerColorB, 255);
 
+        // Update UI
+        UI.GetComponent<UIManager>().UpdateRGB(new Vector3(playerColorR, playerColorG, playerColorB));
+
         // Change player's scale
         float scaleStep;
 
