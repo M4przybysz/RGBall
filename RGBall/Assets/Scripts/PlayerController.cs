@@ -126,21 +126,17 @@ public class PlayerController : MonoBehaviour
         focalPointTransform = focalPoint.transform;
 
         RespawnPosition = transform.position;
-
-        // Update UI
-        UI.GetComponent<UIManager>().UpdateRGB(new Vector3(0, 0, 0));
-        UI.GetComponent<UIManager>().UpdateInvertion(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckPositionY(); // Check if player fell off the map
         HandleInputs();
     }
 
     void FixedUpdate()
     {
+        CheckPositionY(); // Check if player fell off the map
         MoveBall();
     }
 
@@ -330,7 +326,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("KillingFloor") && !collision.gameObject.CompareTag("Launcher"))
         {
-            playerRigidbody.AddExplosionForce(ExtraBounceForce * BounceForceMultiplier, collision.GetContact(0).point, 5);
+            if (collision.gameObject.CompareTag("LauncherWall"))
+            {
+                playerRigidbody.AddForce(collision.gameObject.transform.up * ExtraBounceForce * BounceForceMultiplier);
+            }
+            else
+            {
+                playerRigidbody.AddExplosionForce(ExtraBounceForce * BounceForceMultiplier, collision.GetContact(0).point, 5);   
+            }
         }
 
         if (collision.gameObject.CompareTag("Ground") && BounceForceMultiplier != 1)

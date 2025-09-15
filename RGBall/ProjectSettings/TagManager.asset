@@ -11,6 +11,7 @@ TagManager:
   - ColorfulGate
   - ColorPicker
   - Launcher
+  - LauncherWall
   layers:
   - Default
   - TransparentFX

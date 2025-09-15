@@ -15,6 +15,13 @@ public class UIManager : MonoBehaviour
         colorRText = GameObject.Find("ColorR").GetComponent<TextMeshProUGUI>();
         colorGText = GameObject.Find("ColorG").GetComponent<TextMeshProUGUI>();
         colorBText = GameObject.Find("ColorB").GetComponent<TextMeshProUGUI>();
+
+        // Set starting UI values
+        UpdateRGB(new Vector3(0, 0, 0));
+        UpdateInvertion(false);
+
+        // Hide cursor
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
