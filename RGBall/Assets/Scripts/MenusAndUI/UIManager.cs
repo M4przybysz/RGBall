@@ -19,15 +19,6 @@ public class UIManager : MonoBehaviour
         // Set starting UI values
         UpdateRGB(new Vector3(0, 0, 0));
         UpdateInvertion(false);
-
-        // Hide cursor
-        Cursor.visible = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void UpdateRGB(Vector3 color)

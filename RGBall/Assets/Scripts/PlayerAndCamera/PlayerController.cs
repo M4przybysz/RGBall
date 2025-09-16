@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     float _extraBounceForce = 1500f;
     public const float minExtraBounceForce = 0f;
     public const float normalExtraBounceForce = 1500f;
-    public const float maxExtraBounceForce = 7500f;
+    public const float maxExtraBounceForce = 5000f;
     float _bounciness = 0.5f;
     public const float minBounciness = 0f;
     public const float normalBounciness = 0.5f;
