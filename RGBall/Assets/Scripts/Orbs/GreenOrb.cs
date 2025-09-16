@@ -1,12 +1,15 @@
 using UnityEngine;
 
+// INHERITANCE
 public class GreenOrb : Orb
 {
+    // POLYMORPHISM
     public override void SetColor()
     {
         GetComponent<Renderer>().material.color = new Color32(0, (byte)colorValue, 0, 255);
     }
 
+    // POLYMORPHISM
     public override void ChanagePlayerAspect()
     {
         // Get player

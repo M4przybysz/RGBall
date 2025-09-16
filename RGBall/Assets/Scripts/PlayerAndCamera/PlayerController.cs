@@ -55,8 +55,9 @@ public class PlayerController : MonoBehaviour
     public const float maxScale = 2.5f;
 
     //========================================================================
-    // Backing fields
+    // Encapsulation
     //========================================================================
+    // ENCAPSULATION
     public Vector3 RespawnPosition
     {
         get { return _respawnPosition; }
@@ -131,11 +132,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ABSTRACTION
         HandleInputs();
     }
 
     void FixedUpdate()
     {
+        // ABSTRACTION
         CheckPositionY(); // Check if player fell off the map
         MoveBall();
     }

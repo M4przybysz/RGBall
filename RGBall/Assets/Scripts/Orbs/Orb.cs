@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public class Orb : MonoBehaviour
 {
     protected GameObject UI;
