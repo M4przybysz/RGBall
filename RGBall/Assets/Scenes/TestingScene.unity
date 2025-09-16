@@ -705,6 +705,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1794794038}
   - {fileID: 1463887637}
   - {fileID: 1836735817}
   - {fileID: 383820828}
@@ -4416,7 +4417,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 398282320}
     m_Modifications:
     - target: {fileID: 3993902785459841798, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_Name
@@ -4424,15 +4425,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 29.659517
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 15.360668
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -26.074537
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4440,15 +4441,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4469320426193765518, guid: 0f38680568a93eb45bfba3cdc4ede248, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4974,7 +4975,6 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 669649027}
   - {fileID: 651164121}
-  - {fileID: 6862201595127383942}
   - {fileID: 8955451721244274804}
   - {fileID: 447013162665900160}
   - {fileID: 607580136}
