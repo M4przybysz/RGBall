@@ -14,12 +14,6 @@ public class MainMenuController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void NewGame()
     {
         SceneManager.LoadScene("TestingScene");
@@ -28,11 +22,6 @@ public class MainMenuController : MonoBehaviour
     public void Continue()
     {
         SceneManager.LoadScene("TestingScene");
-    }
-
-    public void SelectLevel()
-    {
-
     }
 
     public void QuitGame()
