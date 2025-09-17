@@ -11,6 +11,7 @@ public class SelectLevelMenuController : MonoBehaviour
 
     public void SelectLevel(string levelName)
     {
+        GameManager.Instance.LastPlayedLevel = levelName;
         SceneManager.LoadScene(levelName);
     }
 
@@ -26,7 +27,7 @@ public class SelectLevelMenuController : MonoBehaviour
     public void OpenMenu()
     {
         // Show all menu elements
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount && i < GameManager.Instance.LevelsCompleted + 3; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
         }

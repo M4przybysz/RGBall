@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             LoadPlayerData();
-            print("xxx");
         }
 
         Instance = this;

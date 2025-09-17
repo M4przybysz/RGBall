@@ -16,16 +16,18 @@ public class MainMenuController : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("TestingScene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void Continue()
     {
-        SceneManager.LoadScene("TestingScene");
+        SceneManager.LoadScene(GameManager.Instance.LastPlayedLevel);
     }
 
     public void QuitGame()
     {
+        GameManager.Instance.SavePlayerData();
+
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
