@@ -1,8 +1,5 @@
 using UnityEngine;
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -40,10 +37,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void SaveAndQuit()
     {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene("TitleScreen");
     }
 }
