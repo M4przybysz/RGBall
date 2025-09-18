@@ -323,6 +323,11 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.linearDamping = 0;
             other.GetComponent<LauncherController>().Launch();
         }
+
+        if (other.CompareTag("NextLevelTrigger"))
+        {
+            GameManager.Instance.LoadLevel(other.GetComponent<NextLevelInfo>().nextLevelName);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

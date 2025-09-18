@@ -12,6 +12,7 @@ TagManager:
   - ColorPicker
   - Launcher
   - LauncherWall
+  - NextLevelTrigger
   layers:
   - Default
   - TransparentFX

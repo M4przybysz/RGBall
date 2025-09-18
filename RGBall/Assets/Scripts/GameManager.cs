@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,16 +43,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //========================================================================
+    // Managing levels
+    //========================================================================
+    public void LoadLevel(string levelName)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        SceneManager.LoadScene(levelName);
     }
 
     //========================================================================

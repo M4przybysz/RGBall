@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 2185583661894934035, guid: f882237f368b2d842946539f05b21ddc, type: 3}
+      propertyPath: nextLevelName
+      value: Level5
+      objectReference: {fileID: 0}
     - target: {fileID: 5153465175824898830, guid: f882237f368b2d842946539f05b21ddc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
