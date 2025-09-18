@@ -42,12 +42,27 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        HandleInputs();
+    }
 
     //========================================================================
-    // Managing levels
+    // Custom methods
     //========================================================================
+    void HandleInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "TitleScreen")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
     public void LoadLevel(string levelName)
     {
+        LastPlayedLevel = levelName;
         SceneManager.LoadScene(levelName);
     }
 

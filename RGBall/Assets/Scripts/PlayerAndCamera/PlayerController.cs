@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //========================================================================
-    // Original methods
+    // Custom methods
     //========================================================================
     void MoveBall()
     {
