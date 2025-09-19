@@ -744,6 +744,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9092013180784474992, guid: 6c19df666546fb843a31a3afc567c9fa, type: 3}
+      propertyPath: m_text
+      value: 'WSAD - Roll around
+
+        Space - Invert colors
+
+        R - Restart
+        current level
+
+        H - Show/hide hints
+
+        Esc - Show/hide pause
+        menu
+
+'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -894,6 +910,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1391622445}
+    - target: {fileID: 7182070347114283496, guid: c6c64e1d1c248e644b0930921a02b464, type: 3}
+      propertyPath: colorInvertionUnlocked
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

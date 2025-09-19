@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
     //========================================================================
     const float decelleration = 3f;
     bool _colorInvertion = false;
-    Vector3 _respawnPosition;
+    [SerializeField] bool colorInvertionUnlocked = false;
+    Vector3 RespawnPosition { get; set; }
 
     // Health points
     int _healthPoints = 5;
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
     // Bounce variables
     float _extraBounceForce = 1500f;
     public const float minExtraBounceForce = 0f;
-    public const float normalExtraBounceForce = 1500f;
+    public const float normalExtraBounceForce = 1000f;
     public const float maxExtraBounceForce = 5000f;
     float _bounciness = 0.5f;
     public const float minBounciness = 0f;
@@ -58,12 +59,6 @@ public class PlayerController : MonoBehaviour
     // Encapsulation
     //========================================================================
     // ENCAPSULATION
-    public Vector3 RespawnPosition
-    {
-        get { return _respawnPosition; }
-        set { _respawnPosition = value; }
-    }
-
     public int HealthPoints
     {
         get { return _healthPoints; }
@@ -109,8 +104,11 @@ public class PlayerController : MonoBehaviour
         get { return _colorInvertion; }
         set
         {
-            _colorInvertion = value;
-            InvertColors();
+            if(colorInvertionUnlocked)
+            {
+                _colorInvertion = value;
+                InvertColors();
+            }
         }
     }
 
