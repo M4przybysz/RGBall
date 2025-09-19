@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
-        LastPlayedLevel = levelName;
+        if (levelName != "TitleScreen") { LastPlayedLevel = levelName; }
         SceneManager.LoadScene(levelName);
     }
 
