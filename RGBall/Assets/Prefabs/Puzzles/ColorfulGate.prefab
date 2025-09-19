@@ -293,8 +293,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7918597544577591410}
-  - component: {fileID: 2605080158067285607}
   - component: {fileID: 7169787803576767398}
+  - component: {fileID: 2605080158067285607}
   m_Layer: 0
   m_Name: ColorfulGate
   m_TagString: ColorfulGate
@@ -321,19 +321,6 @@ Transform:
   - {fileID: 3606717266441990213}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2605080158067285607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4577181446821444948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f94febc87614da43ae8154b7d0b5549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorValue: {x: 0, y: 0, z: 0}
 --- !u!65 &7169787803576767398
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -355,6 +342,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 4, z: 1}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &2605080158067285607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4577181446821444948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f94febc87614da43ae8154b7d0b5549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorValue: {x: 0, y: 0, z: 0}
 --- !u!1 &7261098807946184845
 GameObject:
   m_ObjectHideFlags: 0
