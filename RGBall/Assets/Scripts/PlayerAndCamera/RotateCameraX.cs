@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class RotateCameraX : MonoBehaviour
 {
-    Vector2 _offset = new(1.5f, -1.5f);
-    public static readonly Vector2 normalOffset = new(1.5f, -1.5f);
+    Vector2 _offset = new(1.5f, -1f);
+    public static readonly Vector2 normalOffset = new(1.5f, -1f);
     float rotationSpeed = 100f;
     float minRotation = -75;
     float maxRotation = 75;
