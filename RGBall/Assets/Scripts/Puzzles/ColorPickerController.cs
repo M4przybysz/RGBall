@@ -10,10 +10,13 @@ public class ColorPickerController : MonoBehaviour
     List<IActivatable> activatables;
     GameObject pickPlate;
     GameObject colorValueText;
+    BoxCollider boxCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        boxCollider = gameObject.GetComponent<BoxCollider>();
+
         activatables = elementsToActivate.Cast<IActivatable>().ToList();
 
         pickPlate = transform.GetChild(0).gameObject;
@@ -24,6 +27,8 @@ public class ColorPickerController : MonoBehaviour
 
     public void PickColor()
     {
+        boxCollider.enabled = false;
+        
         pickPlate.GetComponent<Renderer>().material.color = new Color32((byte)colorValue.x, (byte)colorValue.y, (byte)colorValue.z, 255);
         colorValueText.SetActive(false);
 
