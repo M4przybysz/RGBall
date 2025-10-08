@@ -20,11 +20,6 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
-    public void Continue()
-    {
-        SceneManager.LoadScene(GameManager.Instance.LastPlayedLevel);
-    }
-
     public void QuitGame()
     {
         GameManager.Instance.SavePlayerData();
