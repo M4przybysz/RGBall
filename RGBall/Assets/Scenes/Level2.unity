@@ -4395,9 +4395,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3524170604842770011, guid: d29826341e2eb8f4a82eda4f0039064e, type: 3}
       propertyPath: m_text
-      value: 'Well done!
-
-        You deserve cookies for that!'
+      value: Well done!
       objectReference: {fileID: 0}
     - target: {fileID: 3524170604842770011, guid: d29826341e2eb8f4a82eda4f0039064e, type: 3}
       propertyPath: m_fontSize

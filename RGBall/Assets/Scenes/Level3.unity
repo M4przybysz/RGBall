@@ -4891,7 +4891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3959281506992329214, guid: 19a0e9956740aeb4485720576ce7f41e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.51
+      value: 10.01
       objectReference: {fileID: 0}
     - target: {fileID: 3959281506992329214, guid: 19a0e9956740aeb4485720576ce7f41e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7757,10 +7757,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3524170604842770011, guid: d29826341e2eb8f4a82eda4f0039064e, type: 3}
       propertyPath: m_text
-      value: 'Good job!
-
-
-        Want some cupcakes?'
+      value: Good job!
       objectReference: {fileID: 0}
     - target: {fileID: 3524170604842770011, guid: d29826341e2eb8f4a82eda4f0039064e, type: 3}
       propertyPath: m_fontSize
@@ -8648,7 +8645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2185583661894934035, guid: f882237f368b2d842946539f05b21ddc, type: 3}
       propertyPath: nextLevelName
-      value: Level4
+      value: EndDemoScreen
       objectReference: {fileID: 0}
     - target: {fileID: 2740726389511293174, guid: f882237f368b2d842946539f05b21ddc, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9203,7 +9200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalScale.z
@@ -9215,7 +9212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9640,7 +9637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalScale.z
@@ -9652,7 +9649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.5
+      value: 9.25
       objectReference: {fileID: 0}
     - target: {fileID: 95118352853864668, guid: 0a3027b163947584693aa1641091016a, type: 3}
       propertyPath: m_LocalPosition.z
