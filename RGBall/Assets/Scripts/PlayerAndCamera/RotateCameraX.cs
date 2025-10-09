@@ -9,6 +9,7 @@ public class RotateCameraX : MonoBehaviour
     float minRotation = -75;
     float maxRotation = 75;
     float rotationX;
+    public bool isCameraLocked = false;
 
     // Backing fields
     public Vector2 Offset
@@ -31,8 +32,11 @@ public class RotateCameraX : MonoBehaviour
     void Update()
     {
         // Move camera up and down
-        rotationX -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
-        rotationX = Math.Clamp(rotationX, minRotation, maxRotation); // Limit camera movement
-        transform.eulerAngles = new Vector3(rotationX, transform.eulerAngles.y, transform.eulerAngles.z);
+        if(!isCameraLocked)
+        {
+            rotationX -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            rotationX = Math.Clamp(rotationX, minRotation, maxRotation); // Limit camera movement
+            transform.eulerAngles = new Vector3(rotationX, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 }

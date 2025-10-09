@@ -31,10 +31,19 @@ public class PauseMenuController : MonoBehaviour
         }
 
         // Show or hide cursor
-        if (child.activeInHierarchy) { Cursor.visible = true; }
-        else { Cursor.visible = false; }
-
-        Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+        if (child.activeInHierarchy) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            GameObject.Find("FocalPoint").GetComponent<RotateCameraY>().isCameraLocked = true;
+            GameObject.Find("Main Camera").GetComponent<RotateCameraX>().isCameraLocked = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            GameObject.Find("FocalPoint").GetComponent<RotateCameraY>().isCameraLocked = false;
+            GameObject.Find("Main Camera").GetComponent<RotateCameraX>().isCameraLocked = false;
+        }
     }
 
     public void SaveAndQuit()

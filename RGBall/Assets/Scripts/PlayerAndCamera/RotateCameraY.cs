@@ -5,6 +5,7 @@ public class RotateCameraY : MonoBehaviour
     [SerializeField] GameObject player;
     float rotationSpeed = 100f;
     float mouseInputX;
+    public bool isCameraLocked = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +20,10 @@ public class RotateCameraY : MonoBehaviour
         transform.position = player.transform.position;
 
         // Move camera left and right
-        mouseInputX = Input.GetAxis("Mouse X");
-        transform.Rotate(Vector3.up, mouseInputX * rotationSpeed * Time.deltaTime);
+        if(!isCameraLocked)
+        {
+            mouseInputX = Input.GetAxis("Mouse X");
+            transform.Rotate(Vector3.up, mouseInputX * rotationSpeed * Time.deltaTime);
+        }
     }
 }
