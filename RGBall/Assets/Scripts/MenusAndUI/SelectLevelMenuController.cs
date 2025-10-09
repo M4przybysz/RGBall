@@ -11,7 +11,6 @@ public class SelectLevelMenuController : MonoBehaviour
 
     public void SelectLevel(string levelName)
     {
-        GameManager.Instance.LastPlayedLevel = levelName;
         SceneManager.LoadScene(levelName);
     }
 

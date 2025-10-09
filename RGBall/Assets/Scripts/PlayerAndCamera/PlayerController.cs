@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("NextLevelTrigger"))
         {
-            GameManager.Instance.LoadLevel(other.GetComponent<NextLevelInfo>().nextLevelName);
+            GameManager.Instance.LoadLevel(other.GetComponent<NextLevelInfo>().nextLevelName, other.GetComponent<NextLevelInfo>().currentLevelNumber);
         }
     }
 

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     //========================================================================
     // Player data
     //========================================================================
-    public string LastPlayedLevel { get; set; }
     int _levelsCompleted;
 
     //========================================================================
@@ -20,7 +19,12 @@ public class GameManager : MonoBehaviour
     public int LevelsCompleted
     {
         get { return _levelsCompleted; }
-        set { _levelsCompleted = Mathf.Clamp(value, 0, 10); }
+        set {
+            if (value >= _levelsCompleted)
+            {
+                _levelsCompleted = Mathf.Clamp(value, 0, 2); // Change to max 10 in the full version 
+            }
+        }
     }
 
     //========================================================================
@@ -60,9 +64,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadLevel(string levelName, int completedLevelNumber)
     {
-        if (levelName != "TitleScreen") { LastPlayedLevel = levelName; }
+        LevelsCompleted = completedLevelNumber;
         SceneManager.LoadScene(levelName);
     }
 
@@ -72,14 +76,12 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     class SaveData
     {
-        public string lastPlayedLevel;
         public int levelsCompleted;
     }
 
     public void SavePlayerData()
     {
         SaveData data = new();
-        data.lastPlayedLevel = LastPlayedLevel;
         data.levelsCompleted = LevelsCompleted;
 
         string json = JsonUtility.ToJson(data);
@@ -95,7 +97,6 @@ public class GameManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            LastPlayedLevel = data.lastPlayedLevel;
             LevelsCompleted = data.levelsCompleted;
         }
         else
@@ -106,7 +107,6 @@ public class GameManager : MonoBehaviour
 
     void SetDefaultData()
     {
-        LastPlayedLevel = "Level1";
         LevelsCompleted = 0;
     }
 }
