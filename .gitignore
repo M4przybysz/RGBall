@@ -101,5 +101,11 @@ ServerData
 # VS Code
 .vscode/
 
+# Builds
+WebGL Builds/
+webgl_sharing
+Windows Builds/
+*.zip
+
 # Screenshots
-Screenshots
+Screenshots/
