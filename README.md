@@ -9,6 +9,6 @@ You need to change the color and modify the behavior of the ball to solve variou
 
 There are other mechanics and rewards for completing each level in development, so stay tuned for updates and a final release in the future.
 
-You can play the RGBall DEMO on:
-- itch.io: https://m4przybysz.itch.io/rgball-demo 
+You can play the RGBall's alpha prototype on:
+- itch.io: https://m4przybysz.itch.io/rgball-alpha
 - Unity Play: https://play.unity.com/pl/games/faab7bd8-df05-43a7-84bf-50cf5a871ac3/rgball-demo
